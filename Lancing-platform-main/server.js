@@ -76,7 +76,31 @@ initializeCronJobs();
 
 
 /* ---------- SERVER ---------- */
-const PORT = process.env.PORT || 5000;
+let isconnected = false;
+
+async function connectDB() {
+
+    try {
+        await mongoose.connect(process.env.MONGO_URI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        });
+        isconnected = true;
+        console.log('connected to db')
+
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+app.use((req, res, next) => {
+    if (!isconnected) {
+        connectDB();
+    }
+    next();
+})
+
+//const PORT = process.env.PORT || 5000;
 
 app.get("/", (req, res) => {
     res.send("This is Lancing Backend")
@@ -89,6 +113,8 @@ app.get("/api/health", (req, res) => {
         timestamp: new Date().toISOString()
     });
 });
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
+// app.listen(PORT, () => {
+//     console.log(`Server running on port ${PORT}`);
+// });
+
+module.exports = app;
