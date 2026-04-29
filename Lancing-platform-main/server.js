@@ -21,7 +21,7 @@ import initializeCronJobs from "./src/config/cronJobs.js";
 import taxonomyRoutes from "./src/routes/taxonomy.routes.js";
 import supportRoutes from "./src/routes/support.routes.js";
 import reportRoutes from "./src/routes/report.routes.js";
-
+import mongoose from "mongoose";
 
 const app = express();
 
@@ -117,4 +117,4 @@ app.get("/api/health", (req, res) => {
 //     console.log(`Server running on port ${PORT}`);
 // });
 
-module.exports = app;
+export default app;
