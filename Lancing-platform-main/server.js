@@ -7,7 +7,7 @@ import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 // Routes
 import authRoutes from "./src/routes/auth.routes.js";
-import connectDB from "./src/config/db.js";
+//import connectDB from "./src/config/db.js";
 import jobRoutes from "./src/routes/job.routes.js";
 import proposalRoutes from "./src/routes/proposal.routes.js";
 import messageRoutes from "./src/routes/message.routes.js";
@@ -36,7 +36,7 @@ app.use(express.json());
 app.use(cors(corsOptions));
 app.use(helmet());
 app.use("/uploads", express.static("uploads"));
-connectDB();
+//connectDB();
 
 /* ---------- ROUTES ---------- */
 app.use("/api/auth", authRoutes);
